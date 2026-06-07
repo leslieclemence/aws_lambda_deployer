@@ -1,6 +1,6 @@
 # 🚀 AWS Lambda Deployer com SAM
 
-[![I Love Camedics](https://img.shields.io/badge/I%20%E2%9D%A4%EF%B8%8F-Camedics-blue?style=for-the-badge)](https://github.com/camedics)
+[![Dr. Leslie](https://img.shields.io/badge/Desenvolvido%20por-Dr.%20Leslie-blue?style=for-the-badge)](https://github.com/leslieclemence)
 [![I Love Python](https://img.shields.io/badge/I%20%E2%9D%A4%EF%B8%8F-Python-yellow?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 [![AWS Lambda](https://img.shields.io/badge/AWS-Lambda-orange?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/lambda/)
 [![SAM](https://img.shields.io/badge/AWS-SAM-orange?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/serverless/sam/)
@@ -30,6 +30,7 @@ Script interativo em Python para criar, atualizar e fazer deploy de funções AW
 - 🔍 **Detecção automática** - Encontra funções Lambda existentes na AWS
 - 📦 **Gerenciamento de roles IAM** - Cria ou reutiliza roles de execução
 - 🌐 **Function URLs** - Configura URLs públicas com CORS
+- 🔗 **URLs Personalizadas (Custom Domains)** - Criação e vinculação automática com CloudFront, ACM (SSL/TLS) e Route 53
 - 💾 **Configuração persistente** - Salva configurações para deploys futuros
 - 🔧 **Variáveis de ambiente** - Suporte completo a environment variables
 - 📚 **Layers** - Adicione layers às suas funções
@@ -165,6 +166,16 @@ Configure URLs públicas para suas Lambdas:
    Origens permitidas (separadas por vírgula) [*]: https://meusite.com
    Métodos permitidos (separados por vírgula) [*]: GET,POST
 ```
+
+### 🔗 URLs Personalizadas (Custom Domains)
+
+O deployer permite expor a Function URL sob um domínio/subdomínio customizado de forma totalmente automatizada:
+1. **SSL/TLS com ACM (Amazon Certificate Manager)**: Solicita ou reutiliza um certificado na região `us-east-1` (exigido pelo CloudFront).
+2. **Validação DNS**: Cria automaticamente o registro CNAME de validação do certificado no Route 53 e aguarda a emissão.
+3. **Distribuição CDN com CloudFront**: Configura a distribuição apontando para a Function URL como origem, passando cabeçalhos e métodos HTTP corretos.
+4. **Registros DNS no Route 53**: Cria ou atualiza os registros de Alias A e AAAA para apontar o domínio customizado para o endereço do CloudFront.
+
+Ao iniciar o deployer, se a função possuir uma URL pública ativada, ele perguntará se você deseja configurar ou atualizar o link HTTPS personalizado.
 
 ### 🔧 Variáveis de Ambiente
 
@@ -345,9 +356,9 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 ---
 
-## ❤️ Feito com amor por Camedics
+## ❤️ Feito com amor por Dr. Leslie
 
-[![I Love Camedics](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by-Camedics-blue?style=flat-square)](https://github.com/camedics)
+[![Dr. Leslie](https://img.shields.io/badge/Made%20with%20%E2%9D%A4%EF%B8%8F%20by-Dr.%20Leslie-blue?style=flat-square)](https://github.com/leslieclemence)
 [![Python](https://img.shields.io/badge/Powered%20by-Python-yellow?style=flat-square&logo=python&logoColor=white)](https://python.org)
 
 ---
